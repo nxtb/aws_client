@@ -125,7 +125,7 @@ class KinesisVideoMedia {
   /// content. If you don't specify the <code>streamName</code>, you must
   /// specify the <code>streamARN</code>.
 
-  ByteStream getMedia({
+  Future<ByteStream> getMedia({
     required StartSelector startSelector,
     String? streamARN,
     String? streamName,
