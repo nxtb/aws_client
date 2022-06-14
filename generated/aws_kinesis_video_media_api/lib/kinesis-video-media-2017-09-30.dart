@@ -7,6 +7,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:http/http.dart';
 import 'package:shared_aws_api/shared.dart' as _s;
 import 'package:shared_aws_api/shared.dart'
     show
