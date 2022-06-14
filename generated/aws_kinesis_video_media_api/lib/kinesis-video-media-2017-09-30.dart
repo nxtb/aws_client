@@ -124,7 +124,7 @@ class KinesisVideoMedia {
   /// content. If you don't specify the <code>streamName</code>, you must
   /// specify the <code>streamARN</code>.
 
-  void getMedia({
+  ByteStream getMedia({
     required StartSelector startSelector,
     String? streamARN,
     String? streamName,
@@ -145,11 +145,7 @@ class KinesisVideoMedia {
       requestUri: '/getMedia',
       exceptionFnMap: _exceptionFns,
     );
-    response.stream.listen((value) {
-      print(value);
-    }, onDone: () {
-      print("Stream Finished");
-    });
+    return response.stream;
   }
 }
 
