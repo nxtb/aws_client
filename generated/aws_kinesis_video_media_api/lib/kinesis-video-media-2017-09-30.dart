@@ -123,40 +123,33 @@ class KinesisVideoMedia {
   /// The Kinesis video stream name from where you want to get the media
   /// content. If you don't specify the <code>streamName</code>, you must
   /// specify the <code>streamARN</code>.
-  Future<GetMediaOutput> getMedia({
+
+  void getMedia({
     required StartSelector startSelector,
     String? streamARN,
     String? streamName,
   }) async {
     ArgumentError.checkNotNull(startSelector, 'startSelector');
-    _s.validateStringLength(
-      'streamARN',
-      streamARN,
-      1,
-      1024,
-    );
-    _s.validateStringLength(
-      'streamName',
-      streamName,
-      1,
-      256,
-    );
+    _s.validateStringLength('streamARN', streamARN, 1, 1024);
+    _s.validateStringLength('streamName', streamName, 1, 256);
+
     final $payload = <String, dynamic>{
       'StartSelector': startSelector,
       if (streamARN != null) 'StreamARN': streamARN,
       if (streamName != null) 'StreamName': streamName,
     };
+
     final response = await _protocol.sendRaw(
       payload: $payload,
       method: 'POST',
       requestUri: '/getMedia',
       exceptionFnMap: _exceptionFns,
     );
-    return GetMediaOutput(
-      payload: await response.stream.toBytes(),
-      contentType:
-          _s.extractHeaderStringValue(response.headers, 'Content-Type'),
-    );
+    response.stream.listen((value) {
+      print(value);
+    }, onDone: () {
+      print("Stream Finished");
+    });
   }
 }
 
