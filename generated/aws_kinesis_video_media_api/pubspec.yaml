@@ -10,7 +10,11 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  shared_aws_api: ^1.2.0
+  shared_aws_api:
+    git:
+      url: https://github.com/nxtb/aws_client
+      path: shared_aws_api
+      ref: 4b60b2b9523fea851a81afb729acf49ac63c28c7
   http: ^0.13.4
 
 
